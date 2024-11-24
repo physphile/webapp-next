@@ -1,0 +1,28 @@
+.grid {
+	display: grid;
+	--columns: 4;
+	grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+	gap: 8px;
+}
+
+.query {
+	margin-bottom: 40px;
+}
+
+@media screen and (width <= 1000px) {
+	.grid {
+		--columns: 3;
+	}
+}
+
+@media screen and (width <= 700px) {
+	.grid {
+		--columns: 2;
+	}
+}
+
+@media screen and (width <= 400px) {
+	.grid {
+		--columns: 1;
+	}
+}

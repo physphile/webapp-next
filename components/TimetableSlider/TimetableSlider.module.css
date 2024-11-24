@@ -1,0 +1,28 @@
+.events {
+	display: flex;
+	gap: 8px;
+	flex-direction: column;
+}
+
+.illustration {
+	align-self: center;
+	max-width: 100%;
+	aspect-ratio: 1;
+	height: auto;
+}
+
+.swiper {
+	flex: 1;
+	width: calc(100% + 32px);
+	margin: 0 -16px -16px;
+	position: relative;
+}
+
+.swiper :global(.swiper-wrapper) {
+	position: absolute;
+	inset: 0;
+}
+
+.event {
+	margin: 0 16px;
+}

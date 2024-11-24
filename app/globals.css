@@ -1,0 +1,15 @@
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+span {
+	display: inline-flex;
+}
+
+:root {
+	--gil-color-underlay: rgba(240, 243, 245, 1);
+}
