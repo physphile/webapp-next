@@ -39,28 +39,29 @@ const DayTimetable: React.FC<Props> = async ({ params }) => {
 		)}&end=${toIsoDate(twoWeeksAhead)}&group_id=${groupId}`
 	).then(response => response.json());
 
-	const groupedEvents = events.items.reduce((acc, event, index, arr) => {
+	const groupedEvents = Array.from({ length: 14 }, (_, index) => {
 		const date = toIsoDate(
 			new Date(
 				Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + index)
 			)
 		);
-		const events = arr.filter(({ start_ts }) => start_ts.includes(date));
-		return [...acc, events];
-	}, [] as IEvent[][]);
+		return events.items.filter(({ start_ts }) => start_ts.includes(date));
+	});
+
+	const formattedDate = new Date(currentDate).toLocaleDateString("ru-RU", { dateStyle: "full" });
 
 	return (
 		<>
 			<Text variant="header-1" className={styles.group}>
 				Группа №{group.number}
 			</Text>
-			<Text variant="subheader-2" className={styles.date}>
-				{new Date(currentDate).toLocaleDateString("ru-RU", { dateStyle: "full" })}
+			<Text variant="subheader-2" className={styles.date} id="date">
+				{formattedDate}
 			</Text>
-			<Text variant="subheader-1" className={styles.parity} color="secondary">
+			<Text variant="subheader-1" className={styles.parity} color="secondary" id="parity">
 				{parity === "even" ? "Чётная" : "Нечётная"} неделя
 			</Text>
-			<TimetableSlider schedule={groupedEvents} />
+			<TimetableSlider schedule={groupedEvents} initialDate={toIsoDate(currentDate)} />
 		</>
 	);
 };
